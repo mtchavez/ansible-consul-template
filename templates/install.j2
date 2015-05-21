@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#
+# Install consul-template
+#
+
+pushd {{consul_template_dl_dir}}
+
+wget {{consul_template_url}}
+tar -xvf {{consul_template_zip}}
+cd consul-template_{{consul_template_ver}}_{{consul_template_arch}}
+chmod 0755 {{consul_template_bin_name}}
+mv -f {{consul_template_bin_name}} {{consul_template_bin_path}}
+
+popd
