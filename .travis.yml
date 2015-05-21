@@ -7,4 +7,4 @@ before_install:
 install:
   - pip install ansible
 script:
-  - ansible-playbook -i inventory role.yml -e consul_template_bin_path=/home/travis/
+  - ansible-playbook -i inventory role.yml -e consul_template_bin_path=/home/travis/ -e consul_template_templates_dir=/home/travis/consul-templates
