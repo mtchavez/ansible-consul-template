@@ -20,9 +20,6 @@ consul_template_ver: "0.9.0"
 consul_template_arch: "linux_amd64"
 consul_template_dl_dir: "/tmp"
 consul_template_bin_path: "/usr/local/bin"
-Dependencies
-------------
-
 ```
 
 Dependencies
