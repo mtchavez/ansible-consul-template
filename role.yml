@@ -1,0 +1,13 @@
+---
+
+- name: Test consul-template role
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+  vars_files:
+    - "defaults/main.yml"
+    - "vars/main.yml"
+  vars:
+    envconsul_bin_path: "/home/travis/"
+  tasks:
+    - include: "tasks/main.yml"
