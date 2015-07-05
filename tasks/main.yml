@@ -10,15 +10,16 @@
     - consul-template
 
 - name: Check consul-template version
-  shell: consul-template --version >> tmp.ver 2>&1 && grep {{consul_template_ver}} tmp.ver
-  ignore_errors: true
+  shell: consul-template --version 2>&1 | grep {{consul_template_ver}}
+  failed_when: false
+  changed_when: false
   register: consul_template_ver_matches
   tags:
     - consul-template
 
 - name: Install consul-template
   shell: "{{consul_template_install_script}}"
-  when: consul_template_ver_matches|failed
+  when: consul_template_ver_matches.rc != 0
   tags:
     - consul-template
 
