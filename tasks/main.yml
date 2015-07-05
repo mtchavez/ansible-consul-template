@@ -26,12 +26,12 @@
 - name: Verify binary
   stat:
     path: "{{consul_template_bin_path}}//{{consul_template_bin_name}}"
-  register: verify_binary
+  register: consul_template_verify_binary
 
 - name: Fail if binary is not present
   fail:
     msg: consul-template binary is not present
-  when: not verify_binary.stat.exists
+  when: not consul_template_verify_binary.stat.exists
 
 - name: Make templates dir
   file:
