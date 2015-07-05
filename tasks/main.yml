@@ -10,7 +10,7 @@
     - consul-template
 
 - name: Check consul-template version
-  shell: consul-template --version 2>&1 | grep {{consul_template_ver}}
+  shell: "{{consul_template_bin_path}}/{{consul_template_bin_name}} --version 2>&1 | grep {{consul_template_ver}}"
   failed_when: false
   changed_when: false
   register: consul_template_ver_matches
@@ -25,7 +25,7 @@
 
 - name: Verify binary
   stat:
-    path: "{{consul_template_bin_path}}//{{consul_template_bin_name}}"
+    path: "{{consul_template_bin_path}}/{{consul_template_bin_name}}"
   register: consul_template_verify_binary
   tags:
     - consul-template
