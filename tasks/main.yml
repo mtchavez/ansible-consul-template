@@ -10,20 +10,30 @@
     - consul-template
 
 - name: Check consul-template version
-  shell: consul-template --version >> tmp.ver 2>&1 && cat tmp.ver  | grep {{consul_template_ver}}
-  ignore_errors: true
+  shell: "{{consul_template_bin_path}}/{{consul_template_bin_name}} --version 2>&1 | grep {{consul_template_ver}}"
+  failed_when: false
+  changed_when: false
   register: consul_template_ver_matches
   tags:
     - consul-template
 
 - name: Install consul-template
   shell: "{{consul_template_install_script}}"
-  when: consul_template_ver_matches|failed
+  when: consul_template_ver_matches.rc != 0
   tags:
     - consul-template
 
 - name: Verify binary
-  shell: "stat {{consul_template_bin_path}}/{{consul_template_bin_name}}"
+  stat:
+    path: "{{consul_template_bin_path}}/{{consul_template_bin_name}}"
+  register: consul_template_verify_binary
+  tags:
+    - consul-template
+
+- name: Fail if binary is not present
+  fail:
+    msg: consul-template binary is not present
+  when: not consul_template_verify_binary.stat.exists
   tags:
     - consul-template
 
