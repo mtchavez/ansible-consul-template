@@ -1,7 +1,7 @@
 ---
 # vars file for consul-template
 
-consul_template_ver: "0.9.0"
+consul_template_ver: "0.10.0"
 consul_template_arch: "linux_amd64"
 consul_template_zip: "consul-template_{{consul_template_ver}}_{{consul_template_arch}}.tar.gz"
 consul_template_url: "https://github.com/hashicorp/consul-template/releases/download/v{{consul_template_ver}}/{{consul_template_zip}}"
