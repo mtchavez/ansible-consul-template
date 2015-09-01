@@ -5,7 +5,7 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq python-apt python-pycurl
 install:
-  - pip install ansible
+  - ./script/bootstrap
 script:
   - ansible-playbook -i inventory role.yml -e consul_template_bin_path=/home/travis/ -e consul_template_templates_dir=/home/travis/consul-templates
   - ansible-playbook -i inventory role.yml -e consul_template_bin_path=/home/travis/ -e consul_template_templates_dir=/home/travis/consul-templates | grep -q 'changed=0.*failed=0'
