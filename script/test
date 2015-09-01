@@ -1,0 +1,51 @@
+#!/bin/bash
+#
+# Test script for project
+#
+
+set -e
+
+GREEN=$(tput setaf 64)
+RED=$(tput setaf 160)
+RESET=$(tput sgr0)
+if [ -z "$ROOT_PATH" ]; then
+    ROOT_PATH="`pwd`/sandbox"
+fi
+rm -rf $ROOT_PATH
+mkdir -p $ROOT_PATH
+
+if [ -z "$TEMPLATE_PATH" ]; then
+    TEMPLATE_PATH="$ROOT_PATH/consul-templates"
+fi
+rm -rf $TEMPLATE_PATH
+mkdir -p $TEMPLATE_PATH
+
+function display() {
+    echo "-----> [`date +"%Y-%m-%d-%H:%M:%S"`] [test] $1"
+}
+
+if [ ! `which ansible-playbook` ]; then
+    display "${RED}Please run ./script/bootstrap to set up dependencies${RESET}"
+    exit 1
+fi
+
+display "Running test playbook"
+ansible-playbook role.yml \
+    -i inventory \
+    -e consul_template_bin_path=$ROOT_PATH \
+    -e consul_template_templates_dir=$TEMPLATE_PATH
+
+display "Running test playbook to check idempotency"
+ansible-playbook role.yml \
+    -i inventory \
+    -e consul_template_bin_path=$ROOT_PATH \
+    -e consul_template_templates_dir=$TEMPLATE_PATH | grep -q 'changed=0.*failed=0'
+
+display "${GREEN}Finished running tests${RESET}"
+
+rm -rf $ROOT_PATH
+rm -rf $TEMPLATE_PATH
+
+exit 0
+
+# vim: ft=sh:
