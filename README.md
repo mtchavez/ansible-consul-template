@@ -34,7 +34,7 @@ Install consul-template at a specific version
 
     - hosts: servers
       roles:
-         - { role: mtchavez.consul-template, consul_template_ver: "0.9.0" }
+         - { role: mtchavez.consul-template, consul_template_ver: "0.9.0", become: yes }
 
 License
 -------
