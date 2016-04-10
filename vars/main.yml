@@ -1,12 +1,2 @@
 ---
 # vars file for consul-template
-
-consul_template_ver: "0.10.0"
-consul_template_arch: "linux_amd64"
-consul_template_zip: "consul-template_{{consul_template_ver}}_{{consul_template_arch}}.tar.gz"
-consul_template_url: "https://github.com/hashicorp/consul-template/releases/download/v{{consul_template_ver}}/{{consul_template_zip}}"
-consul_template_bin_path: "/usr/local/bin"
-consul_template_install_script: "{{consul_template_bin_path}}/install-consul-template"
-consul_template_dl_dir: "/tmp"
-consul_template_bin_name: "consul-template"
-consul_template_templates_dir: "/usr/local/etc/consul-templates"
