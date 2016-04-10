@@ -4,13 +4,13 @@
 - name: Write install script
   template:
     src=install.j2
-    dest={{consul_template_install_script}}
+    dest={{ consul_template_install_script }}
     mode=0755
   tags:
     - consul-template
 
 - name: Check consul-template version
-  shell: "{{consul_template_bin_path}}/{{consul_template_bin_name}} --version 2>&1 | grep {{consul_template_ver}}"
+  shell: "{{ consul_template_bin_path }}/{{ consul_template_bin_name }} --version 2>&1 | grep {{ consul_template_ver }}"
   failed_when: false
   changed_when: false
   register: consul_template_ver_matches
@@ -18,14 +18,14 @@
     - consul-template
 
 - name: Install consul-template
-  shell: "{{consul_template_install_script}}"
+  shell: "{{ consul_template_install_script }}"
   when: consul_template_ver_matches.rc != 0
   tags:
     - consul-template
 
 - name: Verify binary
   stat:
-    path: "{{consul_template_bin_path}}/{{consul_template_bin_name}}"
+    path: "{{ consul_template_bin_path }}/{{ consul_template_bin_name }}"
   register: consul_template_verify_binary
   tags:
     - consul-template
@@ -39,7 +39,7 @@
 
 - name: Make templates dir
   file:
-    path={{consul_template_templates_dir}}
+    path={{ consul_template_templates_dir }}
     state=directory
   tags:
     - consul-template
