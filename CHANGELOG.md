@@ -1,3 +1,9 @@
+# v0.1.0 - 2016-04-09
+
+* Ansible styling/formatting updates
+* Use new releases.hashicorp for getting consul-template
+* Update default version to `0.14.0`
+
 # v0.0.2 – 2015-08-31
 
 * More idempotent install [#1](mtchavez/ansible-consul-template#1)
