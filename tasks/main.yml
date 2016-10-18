@@ -1,6 +1,9 @@
 ---
 # tasks file for consul-template
 
+- name: Install unzip
+  package: name=unzip state=present
+
 - name: Write install script
   template:
     src: install.j2
