@@ -1,8 +1,13 @@
 ---
 # tasks file for consul-template
 
-- name: Install unzip
-  package: name=unzip state=present
+- name: Install unzip package (Debian based)
+  action: apt pkg=unzip state=present
+  when: ansible_pkg_mgr == 'apt'
+
+- name: Install unzip package (RedHat based)
+  action: yum name=unzip state=present
+  when: ansible_pkg_mgr == 'yum'
 
 - name: Write install script
   template:
