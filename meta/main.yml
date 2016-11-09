@@ -14,7 +14,7 @@ galaxy_info:
     - name: GenericLinux
       versions:
         - all
-  categories:
+  galaxy_tags:
     - monitoring
     - tools
     - services
